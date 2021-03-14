@@ -1,9 +1,20 @@
-from matplotlib import pyplot as plt
+import pygame
 
-dev_x=[25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
+running = True
+pygame.init()
+surface = pygame.display.set_mode((1400, 902))
+pygame.display.set_caption("Układ!")
+fpsClock = pygame.time.Clock()
+FPS=20
 
-dev_y = [38496, 42000, 46752, 49320, 53200,
-         56000, 62316, 64928, 67317, 68748, 73752]
+while running:
+    surface.fill("black")
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
 
+    pygame.display.update()
+    fpsClock.tick(FPS)
 
-plt.plot(dev_x, dev_y)
+pygame.quit()
+

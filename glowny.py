@@ -7,3 +7,5 @@ dev_y = [38496, 42000, 46752, 49320, 53200,
 
 
 plt.plot(dev_x, dev_y)
+
+print("jol")

@@ -3,6 +3,7 @@ from point import Point
 
 pointNames = ("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T")
 
+# draws X axis and Y axis
 def draw_main_lines(centerx, centery, board_w, board_h, surface):
     # draws main lines of the board
     # vertical
@@ -10,7 +11,7 @@ def draw_main_lines(centerx, centery, board_w, board_h, surface):
     # horizontal
     pygame.draw.line(surface, "Black", (centerx - centerx + 5, centery), (board_w - 5, centery), 3)
 
-
+# draws unit lines
 def draw_helpful_lines(centerx, centery, board_w, board_h, space, surface):
     # draw vertical lines to the right from the y axis
     amount = int((board_w - centerx) // space) + 1
@@ -38,6 +39,16 @@ def draw_helpful_lines(centerx, centery, board_w, board_h, space, surface):
         pygame.draw.line(surface, "grey", (centerx - centerx + 5, centery + i * space),
                          (board_w - 5, centery + i * space))
 
+# checks for used point names and picks first available
+def getfreename(points):
+    namesused = []
+    for point in points:
+        namesused.append(point.name)
+
+    for name in pointNames:
+        if name not in namesused:
+            return name
+
 
 class Board:
     def __init__(self, center, unit_space, surface):
@@ -47,17 +58,20 @@ class Board:
         self.centerY = self.board_h / 2  # center Y of main lines
         self.unit_space = unit_space  # space between units
         self.surface = surface
-        self.points = []
+        self.points = []    # array of points
 
+    # draws the lines and points
     def draw(self):
         draw_helpful_lines(self.centerX, self.centerY, self.board_w, self.board_h, self.unit_space, self.surface)
         draw_main_lines(self.centerX, self.centerY, self.board_w, self.board_h, self.surface)
         for point in self.points:
             point.draw(self.centerX, self.centerY, self.unit_space, self.surface)
 
-    def addpoint(self, x, y, name):
+    # adds point (point_x, point_y, name), if name is not specified picks a first free letter
+    def addpoint(self, x, y, name=False):
+        if not name:
+            name = getfreename(self.points)
         self.points.append(Point(x, y, name))
-
 
 
 

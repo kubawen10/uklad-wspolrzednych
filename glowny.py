@@ -1,11 +1,12 @@
 import pygame
 from board import Board
+from menu import Menu
 
 FPS = 20
 SURFACE_W = 1600
 SURFACE_H = 900
 BOARD_W = 1300
-PANEL_W = SURFACE_W - BOARD_W
+MENU_W = SURFACE_W - BOARD_W
 unit_space = 50
 
 pygame.init()
@@ -15,15 +16,26 @@ surface = pygame.display.set_mode((SURFACE_W, SURFACE_H))
 pygame.display.set_caption("Układ!")
 fpsClock = pygame.time.Clock()
 
+# creates board object
 board = Board((BOARD_W, SURFACE_H), unit_space, surface)
-board.addpoint(1,2,"A")
+
+# adds points DELETE
+board.addpoint(1, 2, "A")
+board.addpoint(3.5, 3.5)
+
+# creates menu object
+menu = Menu(BOARD_W, MENU_W, surface)
 
 
 while running:
     surface.fill((224, 235, 235))
+
     for event in pygame.event.get():
+
         if event.type == pygame.QUIT:
             running = False
+
+        # checks if user wants to move the board or scale it (arrows and numpad + -)
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_UP:
                 board.centerY -= board.unit_space
@@ -39,9 +51,20 @@ while running:
                 if board.unit_space > 5:
                     board.unit_space -= 5
 
+        # checks if mouse clicked in the menu area
+        if event.type == pygame.MOUSEBUTTONUP and pygame.mouse.get_pos()[0] > BOARD_W:
+            # checks if any of the buttons clicked, 0 if not, button_text if yes
+            buttonClicked = menu.click()
+            if buttonClicked != 0:
+                print(buttonClicked)
+
+    # draws the board and all the points, lines etc
     board.draw()
 
-    pygame.draw.line(surface, "black", (SURFACE_W - PANEL_W, 0), (SURFACE_W - PANEL_W, SURFACE_H))
+    # draws the menu and the buttons
+    menu.draw()
+
+    pygame.draw.line(surface, "black", (SURFACE_W - MENU_W, 0), (SURFACE_W - MENU_W, SURFACE_H))
 
     pygame.display.update()
     fpsClock.tick(FPS)

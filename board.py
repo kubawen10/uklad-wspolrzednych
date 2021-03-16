@@ -1,5 +1,7 @@
 import pygame
+from point import Point
 
+pointNames = ("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T")
 
 def draw_main_lines(centerx, centery, board_w, board_h, surface):
     # draws main lines of the board
@@ -45,7 +47,17 @@ class Board:
         self.centerY = self.board_h / 2  # center Y of main lines
         self.unit_space = unit_space  # space between units
         self.surface = surface
+        self.points = []
 
     def draw(self):
         draw_helpful_lines(self.centerX, self.centerY, self.board_w, self.board_h, self.unit_space, self.surface)
         draw_main_lines(self.centerX, self.centerY, self.board_w, self.board_h, self.surface)
+        for point in self.points:
+            point.draw(self.centerX, self.centerY, self.unit_space, self.surface)
+
+    def addpoint(self, x, y, name):
+        self.points.append(Point(x, y, name))
+
+
+
+

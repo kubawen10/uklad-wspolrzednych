@@ -16,6 +16,8 @@ pygame.display.set_caption("Układ!")
 fpsClock = pygame.time.Clock()
 
 board = Board((BOARD_W, SURFACE_H), unit_space, surface)
+board.addpoint(1,2,"A")
+
 
 while running:
     surface.fill((224, 235, 235))
@@ -34,9 +36,8 @@ while running:
             elif event.key == pygame.K_KP_PLUS:
                 board.unit_space += 5
             elif event.key == pygame.K_KP_MINUS:
-                if board.unit_space>5:
+                if board.unit_space > 5:
                     board.unit_space -= 5
-            print(board.centerX,board.centerY,board.unit_space)
 
     board.draw()
 

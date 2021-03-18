@@ -19,12 +19,8 @@ fpsClock = pygame.time.Clock()
 # creates board object
 board = Board((BOARD_W, SURFACE_H), unit_space, surface)
 
-# adds points DELETE
-board.addpoint(1, 2, "A")
-board.addpoint(3.5, 3.5)
-
 # creates menu object
-menu = Menu(BOARD_W, MENU_W, surface)
+menu = Menu(BOARD_W, MENU_W, SURFACE_H, surface)
 
 
 while running:
@@ -51,6 +47,21 @@ while running:
                 if board.unit_space > 5:
                     board.unit_space -= 5
 
+            else:
+                value = menu.panel.input(event)
+                if value:
+                    value = list(value)
+                    if value[-1] == "Point":
+                        x = float(value[0])
+                        y = float(value[1])
+                        name = value[2]
+                        if int(x)==x:
+                            x=int(x)
+                        if int(y)==y:
+                            y=int(y)
+                        board.addpoint(x, y, name)
+
+
         # checks if mouse clicked in the menu area
         if event.type == pygame.MOUSEBUTTONUP and pygame.mouse.get_pos()[0] > BOARD_W:
             # checks if any of the buttons clicked, 0 if not, button_text if yes
@@ -63,8 +74,6 @@ while running:
 
     # draws the menu and the buttons
     menu.draw()
-
-    pygame.draw.line(surface, "black", (SURFACE_W - MENU_W, 0), (SURFACE_W - MENU_W, SURFACE_H))
 
     pygame.display.update()
     fpsClock.tick(FPS)

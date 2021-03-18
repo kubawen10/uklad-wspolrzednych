@@ -68,8 +68,8 @@ class Board:
             point.draw(self.centerX, self.centerY, self.unit_space, self.surface)
 
     # adds point (point_x, point_y, name), if name is not specified picks a first free letter
-    def addpoint(self, x, y, name=False):
-        if not name:
+    def addpoint(self, x, y, name=""):
+        if name == "":
             name = getfreename(self.points)
         self.points.append(Point(x, y, name))
 

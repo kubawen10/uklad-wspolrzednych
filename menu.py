@@ -84,14 +84,44 @@ class Circle_panel(Panel):
         super().__init__(x, width, win_height, surface)
         self.msg = "S = (x, y), r="
         self.var = {"x = ": None, "y= ": None, "r = ": None, "name =": None}
+        self.cur_var = get_unspecified_value(self.var)
 
     def draw(self):
         pygame.draw.line(self.surface, "black", (self.x, self.y), (self.x + self.width, self.y))
         title = self.font.render(self.msg, True, (0, 0, 0))
         self.surface.blit(title, (self.x, self.y))
 
-        input_text = self.font.render(get_unspecified_value(self.var), True, (0, 0, 0))
+        input_text = self.font.render(self.cur_var + self.cur_input, True, (0, 0, 0))
         self.surface.blit(input_text, (self.x, self.y + 30))
+
+    def input(self, event):
+        numpad_keys = ("[0]", "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]", "[.]")
+        num_keys = ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-")
+        if self.cur_var != "Done":
+            key_pressed = pygame.key.name(event.key)
+            print(key_pressed)
+            if key_pressed in numpad_keys:
+                key_pressed = key_pressed[1]
+                self.cur_input += key_pressed
+            elif self.cur_var != "name = " and key_pressed in num_keys:
+                if key_pressed == "-" and len(self.cur_input) == 0:
+                    self.cur_input += key_pressed
+                elif key_pressed != "-":
+                    self.cur_input += key_pressed
+            elif key_pressed == "backspace":
+                self.cur_input = self.cur_input[:-1]
+            elif self.cur_var == "name = " and len(key_pressed) == 1:
+                self.cur_input += key_pressed.upper()
+
+            elif key_pressed == "return" or key_pressed == "enter":
+                self.var[self.cur_var] = self.cur_input
+                self.cur_var = get_unspecified_value(self.var)
+                self.cur_input = ""
+                if self.cur_var == "Done":
+                    Button.active_btt = 0
+                    self.var["type"] = "Circle"
+                    return self.var.values()
+        return False
 
 
 class Button:

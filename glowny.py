@@ -41,9 +41,9 @@ while running:
                 board.centerX -= board.unit_space
             elif event.key == pygame.K_RIGHT:
                 board.centerX += board.unit_space
-            elif event.key == pygame.K_KP_PLUS:
+            elif event.key == pygame.K_KP_PLUS or event.key == pygame.K_PAGEUP:
                 board.unit_space += 5
-            elif event.key == pygame.K_KP_MINUS:
+            elif event.key == pygame.K_KP_MINUS or event.key == pygame.K_PAGEDOWN:
                 if board.unit_space > 5:
                     board.unit_space -= 5
 

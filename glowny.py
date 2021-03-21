@@ -82,6 +82,8 @@ while running:
             if buttonClicked != 0:
                 print(buttonClicked)
 
+
+
     # draws the board and all the points, lines etc
     board.draw()
 

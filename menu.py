@@ -181,6 +181,7 @@ class Menu:
         self.buttons = []  # button array
         self.panel = Panel(x, width, height, surface)
 
+
         COLOR_INACTIVE = (100, 80, 255)  # color of not active button
         COLOR_ACTIVE = (100, 200, 255)  # color of active button, mousehover or clicked
         BUTTON_WIDTH = 200

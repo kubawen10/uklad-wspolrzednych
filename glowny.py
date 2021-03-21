@@ -56,7 +56,7 @@ while running:
                         y = float(value[1])
                         name = value[2]
                         if int(x) == x:
-                            x=int(x)
+                            x = int(x)
                         if int(y) == y:
                             y = int(y)
                         board.addpoint(x, y, name)
@@ -72,17 +72,20 @@ while running:
                         if int(r) == r:
                             r = int(r)
                         board.addcircle(x, y, r, name)
-
-
+                    elif value[-1] == "Line":
+                        a = float(value[0])
+                        b = float(value[1])
+                        name = value[3]
+                        if int(a)==a:
+                            a=int(a)
+                        if int(b)==b:
+                            b=int(b)
+                        board.addline(a, b, name)
 
         # checks if mouse clicked in the menu area
         if event.type == pygame.MOUSEBUTTONUP and pygame.mouse.get_pos()[0] > BOARD_W:
             # checks if any of the buttons clicked, 0 if not, button_text if yes
             buttonClicked = menu.click()
-            if buttonClicked != 0:
-                print(buttonClicked)
-
-
 
     # draws the board and all the points, lines etc
     board.draw()

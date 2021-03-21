@@ -9,6 +9,7 @@ BOARD_W = 1300
 MENU_W = SURFACE_W - BOARD_W
 unit_space = 50
 
+
 pygame.init()
 running = True
 pygame.init()

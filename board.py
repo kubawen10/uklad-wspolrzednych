@@ -5,6 +5,7 @@ pointNames = ("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "
 circleNames = ("O", "O2", "O3", "O4", "O5", "O6")
 lineNames = ("k", "l", "m", "n", "p", "q", "t")
 
+
 # draws X axis and Y axis
 def draw_main_lines(centerx, centery, board_w, board_h, surface):
     # draws main lines of the board
@@ -13,6 +14,7 @@ def draw_main_lines(centerx, centery, board_w, board_h, surface):
         pygame.draw.line(surface, "black", (centerx, centery - centery + 5), (centerx, board_h - 5), 5)
     # horizontal
     pygame.draw.line(surface, "Black", (centerx - centerx + 5, centery), (board_w - 5, centery), 5)
+
 
 # draws unit lines
 def draw_helpful_lines(centerx, centery, board_w, board_h, space, surface):
@@ -43,6 +45,7 @@ def draw_helpful_lines(centerx, centery, board_w, board_h, space, surface):
         pygame.draw.line(surface, "grey", (centerx - centerx + 5, centery + i * space),
                          (board_w - 5, centery + i * space))
 
+
 # checks for used point names and picks first available
 def getfreename_points(points):
     namesused = []
@@ -52,6 +55,7 @@ def getfreename_points(points):
     for name in pointNames:
         if name not in namesused:
             return name
+
 
 def getfreename_circles(circles):
     namesused = []
@@ -81,10 +85,10 @@ class Board:
         self.unit_space = unit_space  # space between units
         self.surface = surface
         self.points = []    # array of points
-        self.circles = []
+        self.circles = []   # array of circles
         self.lines = []
 
-    # draws the lines and points
+    # draws the lines and objects
     def draw(self):
         draw_helpful_lines(self.centerX, self.centerY, self.board_w, self.board_h, self.unit_space, self.surface)
         draw_main_lines(self.centerX, self.centerY, self.board_w, self.board_h, self.surface)

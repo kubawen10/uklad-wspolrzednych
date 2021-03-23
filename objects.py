@@ -41,12 +41,13 @@ class Line:
         if self.a == 0:
             pygame.draw.line(surface, "black", (0, centery - self.b * space), (self.board_w, centery - self.b * space), width=space//15)
         else:
-            y_top = centery // space
-            y_bottom = (self.board_h-centery)//space
-            print(y_top, y_bottom)
-            x=(y_top-self.b)/self.a
-            print(x)
-            # ogarnac linie!
+            b = centery - self.b * space
+            a = self.a
+            x0 = (centery-b)/-a + centerx
+            end_y = b - a * (self.board_w - centerx)
+            start_y = b + a * centerx
+            pygame.draw.line(surface, "red", (0, start_y), (self.board_w, end_y), width=3)
+
 
 
 

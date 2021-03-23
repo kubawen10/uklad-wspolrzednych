@@ -23,7 +23,7 @@ board = Board((BOARD_W, SURFACE_H), unit_space, surface)
 # creates menu object
 menu = Menu(BOARD_W, MENU_W, SURFACE_H, surface)
 
-
+board.addline(1, +10)
 while running:
     surface.fill((224, 235, 235))
 

@@ -66,6 +66,7 @@ def getfreename_circles(circles):
         if name not in namesused:
             return name
 
+
 def getfreename_line(lines):
     namesused=[]
     for line in lines:

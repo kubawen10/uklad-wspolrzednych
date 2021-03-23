@@ -2,10 +2,10 @@ import pygame
 
 
 # calculates next button's y
-def btty(len, height):
-    if len == 0:
+def btty(leng, height):
+    if leng == 0:
         return 20
-    return 20 + len * height + len * 1
+    return 20 + leng * height + leng * 1
 
 
 def get_unspecified_value(dict):
@@ -15,6 +15,7 @@ def get_unspecified_value(dict):
         if value == None:
             return key
     return "Done"
+
 
 def get_var(button):
     if button == 0:
@@ -26,6 +27,7 @@ def get_var(button):
     elif button == "Line":
         return {"a = ":None, "b = ": None, "name = ": None}
 
+
 def get_msg(button):
     if button == 0:
         return ""
@@ -35,6 +37,7 @@ def get_msg(button):
         return "S = (x, y), r="
     elif button == "Line":
         return "y = ax + b"
+
 
 class Panel:
     def __init__(self, x, width, win_height, surface):
@@ -64,7 +67,6 @@ class Panel:
             num_keys = ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-")
             if self.cur_var != "Done":
                 key_pressed = pygame.key.name(event.key)
-                print(key_pressed)
                 if key_pressed in numpad_keys:
                     key_pressed = key_pressed[1]
                     self.cur_input += key_pressed
@@ -82,7 +84,7 @@ class Panel:
                         self.cur_input += key_pressed.lower()
 
                 elif key_pressed == "return" or key_pressed == "enter":
-                    if self.cur_var != "name = " and len(self.cur_input)==0:
+                    if self.cur_var != "name = " and len(self.cur_input) == 0:
                         pass
                     else:
                         self.var[self.cur_var] = self.cur_input
@@ -95,7 +97,6 @@ class Panel:
             return False
         else:
             pass
-
 
 
 class Button:

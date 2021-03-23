@@ -1,2 +1,0 @@
-def testowa():
-    print("eo")

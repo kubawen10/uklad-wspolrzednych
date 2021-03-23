@@ -25,7 +25,7 @@ class Circle:
 
     def draw(self, centerx, centery, space, surface):
         pygame.draw.circle(surface, "black", (centerx + self.x * space, centery - self.y * space), space / 10)
-        pygame.draw.circle(surface, "black", (centerx + self.x * space, centery - self.y * space), self.r * space+space/24, space//12)
+        pygame.draw.circle(surface, "black", (centerx + self.x * space, centery - self.y * space), self.r * space+space/24, 3)
 
 class Line:
     def __init__(self, a, b, name, board_w, board_h):
@@ -39,7 +39,7 @@ class Line:
 
     def draw(self, centerx, centery, space, surface):
         if self.a == 0:
-            pygame.draw.line(surface, "black", (0, centery - self.b * space), (self.board_w, centery - self.b * space), width=space//15)
+            pygame.draw.line(surface, "black", (0, centery - self.b * space), (self.board_w, centery - self.b * space), width=3)
         else:
             b = centery - self.b * space
             a = self.a

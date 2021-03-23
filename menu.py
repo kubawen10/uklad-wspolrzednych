@@ -172,6 +172,7 @@ class Menu:
 
     # draws buttons and panel
     def draw(self):
+        pygame.draw.rect(self.surface, (224, 235, 235), (self.x, 0, self.width, self.height))
         pygame.draw.line(self.surface, "black", (self.x, 0), (self.x, self.height))
 
         for button in self.buttons:

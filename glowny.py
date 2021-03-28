@@ -3,6 +3,8 @@ from board import Board
 from menu import Menu
 import functions as f
 
+#zmiana
+
 FPS = 20
 SURFACE_W = 1600
 SURFACE_H = 900
